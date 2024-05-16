@@ -70,16 +70,19 @@ export class Main implements Contract {
         });
     }
 
-    async sendWithdrawRequest(provider: ContractProvider, 
+    async sendWithdrawRequest(
+        provider: ContractProvider, 
         sender: Sender,
         value: bigint,
         amount: bigint
         ){
+        console.log("🚀 ~ Main ~ sender:", provider, sender, value, amount);
+        
         const msg_body = beginCell()
             .storeUint(3,32)
             .storeCoins(amount)
             .endCell();
-            
+
         await provider.internal(sender, {
                 value,
                 sendMode: SendMode.PAY_GAS_SEPARATELY,
